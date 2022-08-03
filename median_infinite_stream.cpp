@@ -119,3 +119,9 @@ int main()
     printMedians(arr, n);
     return 0;
 }
+/*
+Time Complexity: O(n Log n). 
+Time Complexity to insert element in min heap is log n. So to insert n element is O( n log n).
+Auxiliary Space : O(n). 
+The Space required to store the elements in Heap is O(n).
+*/
