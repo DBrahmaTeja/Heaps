@@ -1,45 +1,54 @@
-#include<iostream>
-#include<bits/stdc++.h>
-#include<math.h>
+#include <iostream>
+#include <bits/stdc++.h>
+#include <math.h>
 
 using namespace std;
 
 // A utility function to swap two elements
-void swap(int & x, int & y) {
+void swap(int &x, int &y)
+{
   int temp = x;
   x = y;
   y = temp;
 }
 
-class MinHeap {
-  public:
-    int * harr; // pointer to array of elements in heap
-  int capacity; // maximum possible size of min heap
+class MinHeap
+{
+public:
+  int *harr;     // pointer to array of elements in heap
+  int capacity;  // maximum possible size of min heap
   int heap_size; // Current number of elements in min heap
 
-  MinHeap(int cap) {
+  MinHeap(int cap)
+  {
     heap_size = 0;
     capacity = cap;
     harr = new int[cap];
   }
-  int parent(int i) {
+  int parent(int i)
+  {
     return (i - 1) / 2;
   }
 
-  int left(int i) {
+  int left(int i)
+  {
     return (2 * i + 1);
   }
 
-  int right(int i) {
+  int right(int i)
+  {
     return (2 * i + 2);
   }
 
-  int getMin() {
+  int getMin()
+  {
     return harr[0];
   }
 
-  void insertKey(int k) {
-    if (heap_size == capacity) {
+  void insertKey(int k)
+  {
+    if (heap_size == capacity)
+    {
       cout << "\nOverflow: Could not insert Key\n";
       return;
     }
@@ -50,27 +59,34 @@ class MinHeap {
     harr[i] = k;
 
     // Fix the min heap property if it is violated
-    while (i != 0 && harr[parent(i)] > harr[i]) {
+    while (i != 0 && harr[parent(i)] > harr[i])
+    {
       swap(harr[i], harr[parent(i)]);
       i = parent(i);
     }
   }
-  void decreaseKey(int i, int new_val) {
+  void decreaseKey(int i, int new_val)
+  {
     harr[i] = new_val;
-    while (i != 0 && harr[parent(i)] > harr[i]) {
-      swap( & harr[i], & harr[parent(i)]);
+    while (i != 0 && harr[parent(i)] > harr[i])
+    {
+      swap(&harr[i], &harr[parent(i)]);
       i = parent(i);
     }
   }
   // This function deletes key at index i. It first reduced value to minus
   // infinite, then calls extractMin()
-  void deleteKey(int i) {
+  void deleteKey(int i)
+  {
     decreaseKey(i, INT_MIN);
     extractMin();
   }
-  void linearSearch(int val) {
-    for (int i = 0; i < heap_size; i++) {
-      if (harr[i] == val) {
+  void linearSearch(int val)
+  {
+    for (int i = 0; i < heap_size; i++)
+    {
+      if (harr[i] == val)
+      {
         cout << "Value Found!";
         return;
       }
@@ -79,10 +95,12 @@ class MinHeap {
   }
 
   // Method to remove minimum element (or root) from min heap
-  int extractMin() {
+  int extractMin()
+  {
     if (heap_size <= 0)
       return INT_MAX;
-    if (heap_size == 1) {
+    if (heap_size == 1)
+    {
       heap_size--;
       return harr[0];
     }
@@ -98,7 +116,8 @@ class MinHeap {
 
   // A recursive method to heapify a subtree with the root at given index
   // This method assumes that the subtrees are already heapified
-  void MinHeapify(int i) {
+  void MinHeapify(int i)
+  {
     int l = left(i);
     int r = right(i);
     int smallest = i;
@@ -106,24 +125,27 @@ class MinHeap {
       smallest = l;
     if (r < heap_size && harr[r] < harr[smallest])
       smallest = r;
-    if (smallest != i) {
-      swap( & harr[i], & harr[smallest]);
+    if (smallest != i)
+    {
+      swap(&harr[i], &harr[smallest]);
       MinHeapify(smallest);
     }
   }
 
-  void printArray() {
+  void printArray()
+  {
     for (int i = 0; i < heap_size; i++)
       cout << harr[i] << " ";
     cout << endl;
   }
-  int height() {
+  int height()
+  {
     return ceil(log2(heap_size + 1)) - 1;
   }
-
 };
 
-int main() {
+int main()
+{
   int s;
   cout << "Enter Size of Min Heap" << endl;
   cin >> s;
@@ -132,9 +154,10 @@ int main() {
 
   int option, val;
 
-  do {
-    cout << "What operation do you want to perform? " <<
-      " Select Option number. Enter 0 to exit." << endl;
+  do
+  {
+    cout << "What operation do you want to perform? "
+         << " Select Option number. Enter 0 to exit." << endl;
     cout << "1. Insert Key/Node" << endl;
     cout << "2. Search Key/Node" << endl;
     cout << "3. Delete Key/Node" << endl;
@@ -147,7 +170,8 @@ int main() {
 
     cin >> option;
 
-    switch (option) {
+    switch (option)
+    {
     case 0:
       break;
     case 1:
